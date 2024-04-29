@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Forecast</title>
+</head>
+<body>
+    <h1>Weather Forecast for Fargo, ND</h1>
+    <ul>
+        {% for period in forecast %}
+            <li>{{ period.name }}: {{ period.detailedForecast }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

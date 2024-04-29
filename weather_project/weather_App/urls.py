@@ -4,6 +4,5 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views
 
 urlpatterns = [
-    
-
+    path('weather_App/', views.weather, name='home'),
 ]

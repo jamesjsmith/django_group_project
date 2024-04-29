@@ -21,7 +21,7 @@ from django.urls import path, include
 urlpatterns = [
     
     path('admin/', admin.site.urls),
-    path('weather_App/', include('weather_App.urls')),
+    path('weather_App/', include('weather_App.urls'), name='home'),
 ]
 
 from django.views.generic import RedirectView
