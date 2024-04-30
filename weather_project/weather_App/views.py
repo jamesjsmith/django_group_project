@@ -1,20 +1,24 @@
-
-import requests
+# weather_app/views.py
 from django.shortcuts import render
+import requests
 
-def home(request):
-    api_key = "ccc10b2fd58aec6030233953a7c5fa63"
-    city = "Fargo,ND"
-    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
-    
-    response = requests.get(url)
+def get_weather(request):
+    api_key = 'BG4CN8rN1NokZrlNE3AEU2TbVVdV8fcK'  # Replace with your Open-Meteo API key
+    latitude = 46.8772  # Fargo's latitude
+    longitude = -96.7898  # Fargo's longitude
+
+    url = f"https://api.open-meteo.com/weather?latitude={latitude}&longitude={longitude}&hourly=temperature_2m"
+    headers = {'Authorization': f'Bearer {api_key}'}
+
+    response = requests.get(url, headers=headers)
     data = response.json()
-    print(data)
-    weather_data = {
-        "city": city,
-        "temperature": data["main"]["temp"],
-        "description": data["weather"][0]["description"],
-        "icon": data["weather"][0]["icon"]
+
+    temperature = data['hourly']['temperature_2m'][0]['value']
+    time = data['hourly']['time'][0]
+
+    context = {
+        'temperature': temperature,
+        'time': time
     }
 
-    return render(request, "home.html", {"weather_data": weather_data})
+    return render(request, 'home.html', context)

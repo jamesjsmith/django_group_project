@@ -21,13 +21,14 @@ from django.urls import path, include
 urlpatterns = [
     
     path('admin/', admin.site.urls),
-    path('weather_App/', include('weather_App.urls'), name='home'),
+    path('weather_App/', include('weather_App.urls')),
+    path('weather/', include('weather_App.urls')),
 ]
 
 from django.views.generic import RedirectView
 
 urlpatterns += [
-    path('', RedirectView.as_view(url = 'weather_App/', permanent=True))
+    path('', RedirectView.as_view(url = 'weather/'))
 ]
 
 

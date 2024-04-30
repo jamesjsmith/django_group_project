@@ -1,8 +1,7 @@
-from weather_App import views
-from django.urls import path, include
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+# weather_app/urls.py
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('get_weather/', views.get_weather, name='get_weather'),
 ]
