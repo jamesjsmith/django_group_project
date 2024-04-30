@@ -17,12 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
+from weather_App import views
 
 urlpatterns = [
     
     path('admin/', admin.site.urls),
     path('weather_App/', include('weather_App.urls')),
-    path('weather/', include('weather_App.urls')),
+    path('weather/', views.weather, name='weather'),
+    
 ]
 
 from django.views.generic import RedirectView

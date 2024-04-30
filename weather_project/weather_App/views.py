@@ -1,24 +1,21 @@
-# weather_app/views.py
-from django.shortcuts import render
+# weather_App/views.py
 import requests
+from django.shortcuts import render
+from django.conf import settings
 
-def get_weather(request):
-    api_key = 'BG4CN8rN1NokZrlNE3AEU2TbVVdV8fcK'  # Replace with your Open-Meteo API key
-    latitude = 46.8772  # Fargo's latitude
-    longitude = -96.7898  # Fargo's longitude
+def weather(request):
+    api_key = settings.OPENWEATHERMAP_API_KEY
+    api_endpoint = settings.OPENWEATHERMAP_API_ENDPOINT
+    city = 'Fargo,US'  # Example city
+    units = 'metric'  # Example units
 
-    url = f"https://api.open-meteo.com/weather?latitude={latitude}&longitude={longitude}&hourly=temperature_2m"
-    headers = {'Authorization': f'Bearer {api_key}'}
-
-    response = requests.get(url, headers=headers)
+    url = f"{api_endpoint}?q={city}&units={units}&appid={api_key}"
+    response = requests.get(url)
     data = response.json()
 
-    temperature = data['hourly']['temperature_2m'][0]['value']
-    time = data['hourly']['time'][0]
-
     context = {
-        'temperature': temperature,
-        'time': time
+        'city': city,
+        'temperature': data['main']['temp'],
+        'description': data['weather'][0]['description']
     }
-
     return render(request, 'home.html', context)
