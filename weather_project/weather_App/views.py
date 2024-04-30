@@ -1,4 +1,3 @@
-# weather_App/views.py
 import requests
 from django.shortcuts import render
 from django.conf import settings
